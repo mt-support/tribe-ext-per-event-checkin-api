@@ -36,13 +36,13 @@ By default, all of these variables will be replaced by the create method from th
 
 * `__TRIBE_BASE__` - "The Events Calendar" or "Event Tickets"
 * `__TRIBE_NAME__` - Plugin Human-readable name
-* `__TRIBE_NAMESPACE__` - Which namespace we will use for the plugin
-* `__TRIBE_SLUG__` - Uses using dashes normally
-* `__TRIBE_DOMAIN__` - Translation domain normally with "tribe-" prefix
-* `__TRIBE_SLUG_CLEAN__` - Uses underscores, so it's safe for variables
-* `__TRIBE_SLUG_CLEAN_UPPERCASE__` - Uppercase of clean slug
+* `Per_Event_Checkin` - Which namespace we will use for the plugin
+* `per-event-checkin` - Uses using dashes normally
+* `et-per-event-checkin` - Translation domain normally with "tribe-" prefix
+* `per_event_checkin` - Uses underscores, so it's safe for variables
+* `PER_EVENT_CHECKIN` - Uppercase of clean slug
 * `__TRIBE_URL__` - By default empty
-* `__TRIBE_VERSION__` - By default empty
+* `1.0.0` - By default empty
 * `__TRIBE_DESCRIPTION__` - By default empty
 
 #### Slack Bot commands related to Extensions
