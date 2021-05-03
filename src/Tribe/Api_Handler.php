@@ -63,14 +63,13 @@ class Api_Handler {
 			return $is_valid;
 		}
 
-		$api_meta_key = '_et_event_api_key';
 		$requested_api = $qr_data['api_key'];
 
 		$args = [
 			'post_type'  => 'any',
-			'meta_key'   => $api_meta_key,
+			'meta_key'   => $this->api_meta_key,
 			'meta_query' => [
-				'key'   => $api_meta_key,
+				'key'   => $this->api_meta_key,
 				'value' => $requested_api,
 			]
 		];
