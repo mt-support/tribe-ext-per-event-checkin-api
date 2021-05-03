@@ -74,6 +74,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$this->container->singleton( static::class, $this );
 		$this->container->singleton( 'extension.per_event_checkin', $this );
 		$this->container->singleton( 'extension.per_event_checkin.plugin', $this );
+		$this->container->singleton( 'extension.per_event_checkin.api_handler', Api_Handler::class );
 
 		if ( ! $this->check_plugin_dependencies() ) {
 			// If the plugin dependency manifest is not met, then bail and stop here.
