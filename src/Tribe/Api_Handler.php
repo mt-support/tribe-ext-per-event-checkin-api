@@ -125,10 +125,17 @@ class Api_Handler {
 
 		$api_key = get_post_meta( $post->ID, $this->api_meta_key, true );
 
-		$kb_url = 'https://theeventscalendar.com/knowledgebase/k/using-qr-codes-with-event-tickets-plus/';
+		$kb_url  = 'https://theeventscalendar.com/knowledgebase/k/using-qr-codes-with-event-tickets-plus/';
+		$kb_link = '<a href="' . esc_url( $kb_url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'QR Code App', 'et-per-event-checkin' ) . '</a>';
 		?>
-		<input type="text" disabled value="<?php esc_attr_e( $api_key ); ?>">
-		<p><?php printf( wp_kses( 'Copy this API into the <a href="%s" target="_blank" rel="noopener noreferrer">QR Code app</a> to allow checkin for this Event Only.', 'et-per-event-checkin' ), esc_attr( $kb_url ) ); ?></p>
+		<input
+            type="text"
+            disabled
+            value="<?php esc_attr_e( $api_key ); ?>"
+        >
+		<p>
+            <?php printf( esc_html__( 'Copy this API into the %s to allow checkin for this Event Only.', 'et-per-event-checkin' ), $kb_link ); ?>
+        </p>
 		<?php
 	}
 }
