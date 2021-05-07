@@ -36,7 +36,7 @@ class Api_Handler {
 		if ( ! empty( $api_key ) ) {
 			return;
 		}
-
+        /** @var \Tribe__Tickets_Plus__QR__Settings $qr_settings */
 		$qr_settings = tribe( 'tickets-plus.qr.site-settings' );
 
 		$api_key = $qr_settings->generate_new_api();
@@ -65,21 +65,22 @@ class Api_Handler {
 
 		$requested_api = $qr_data['api_key'];
 
-		$args = [
-			'post_type'  => 'any',
-			'meta_key'   => $this->api_meta_key,
-			'meta_query' => [
-				'key'   => $this->api_meta_key,
-				'value' => $requested_api,
-			]
-		];
+        $args = [
+            'post_type'  => 'any',
+            'meta_key'   => $this->api_meta_key,
+            'meta_query' => [
+                'key'   => $this->api_meta_key,
+                'value' => $requested_api,
+            ]
+        ];
 
 		$posts = get_posts( $args );
 
+		// If no events are found for given API key, return original status.
 		if ( empty( $posts ) || count( $posts ) > 1 ) {
 			return $is_valid;
 		}
-
+        // If found event is not same as requested event, bail out.
 		if ( $posts[0]->ID != $qr_data['event_id'] ) {
 			return $is_valid;
 		}
@@ -97,21 +98,21 @@ class Api_Handler {
 		$supported_post_types = (array) tribe_get_option( 'ticket-enabled-post-types', [] );
 
 		if ( ! in_array( $post->post_type, $supported_post_types ) ) {
-			return;
+            return;
 		}
 
 		$api_key = get_post_meta( $post->ID, $this->api_meta_key, true );
 
 		if ( empty( $api_key ) ) {
-			return;
+            return;
 		}
 
 		add_meta_box(
-			'event_tickets_event_api',
-			__( 'Event Check-in API', 'et-per-event-checkin' ),
-			[ $this, 'render_event_tickets_api_meta_box' ],
-			null,
-			'side'
+            'event_tickets_event_api',
+            __( 'Event Check-in API', 'et-per-event-checkin' ),
+            [ $this, 'render_event_tickets_api_meta_box' ],
+            null,
+            'side'
 		);
 	}
 
