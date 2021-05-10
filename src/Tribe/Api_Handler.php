@@ -19,13 +19,13 @@ namespace Tribe\Extensions\Per_Event_Checkin;
 class Api_Handler {
 
 	/**
-     * Meta key name for storing Event API key.
+	 * Meta key name for storing Event API key.
 	 */
-    public $api_meta_key = '_et_event_api_key';
+	public $api_meta_key = '_et_event_api_key';
 
 	/**
-     * Generate API code for Event with Tickets/RSVP.
-     *
+	 * Generate API code for Event with Tickets/RSVP.
+	 *
 	 * @param int $post_id Event or Post ID.
 	 */
 	public function generate_api_code_for_event( $post_id ) {
@@ -36,7 +36,7 @@ class Api_Handler {
 		if ( ! empty( $api_key ) ) {
 			return;
 		}
-        /** @var \Tribe__Tickets_Plus__QR__Settings $qr_settings */
+		/** @var \Tribe__Tickets_Plus__QR__Settings $qr_settings */
 		$qr_settings = tribe( 'tickets-plus.qr.site-settings' );
 
 		$api_key = $qr_settings->generate_new_api();
@@ -45,8 +45,8 @@ class Api_Handler {
 	}
 
 	/**
-     * Filter the API key validation for Check in Request.
-     *
+	 * Filter the API key validation for Check in Request.
+	 *
 	 * @param bool  $is_valid Whether the requested API Key is valid or not.
 	 * @param array $qr_data Request data array.
 	 *
@@ -54,10 +54,10 @@ class Api_Handler {
 	 */
 	function alter_default_api_with_event_api( $is_valid, $qr_data ) {
 
-	    // If already valid, bail out.
-	    if ( $is_valid ) {
-	        return $is_valid;
-        }
+		// If already valid, bail out.
+		if ( $is_valid ) {
+			return $is_valid;
+		}
 
 		if ( ! isset( $qr_data['api_key'] ) ) {
 			return $is_valid;
@@ -65,14 +65,14 @@ class Api_Handler {
 
 		$requested_api = $qr_data['api_key'];
 
-        $args = [
-            'post_type'  => 'any',
-            'meta_key'   => $this->api_meta_key,
-            'meta_query' => [
-                'key'   => $this->api_meta_key,
-                'value' => $requested_api,
-            ]
-        ];
+		$args = [
+			'post_type'  => 'any',
+			'meta_key'   => $this->api_meta_key,
+			'meta_query' => [
+				'key'   => $this->api_meta_key,
+				'value' => $requested_api,
+			]
+		];
 
 		$posts = get_posts( $args );
 
@@ -80,7 +80,7 @@ class Api_Handler {
 		if ( empty( $posts ) || count( $posts ) > 1 ) {
 			return $is_valid;
 		}
-        // If found event is not same as requested event, bail out.
+		// If found event is not same as requested event, bail out.
 		if ( $posts[0]->ID != $qr_data['event_id'] ) {
 			return $is_valid;
 		}
@@ -98,27 +98,27 @@ class Api_Handler {
 		$supported_post_types = (array) tribe_get_option( 'ticket-enabled-post-types', [] );
 
 		if ( ! in_array( $post->post_type, $supported_post_types ) ) {
-            return;
+			return;
 		}
 
 		$api_key = get_post_meta( $post->ID, $this->api_meta_key, true );
 
 		if ( empty( $api_key ) ) {
-            return;
+			return;
 		}
 
 		add_meta_box(
-            'event_tickets_event_api',
-            __( 'Event Check-in API', 'et-per-event-checkin' ),
-            [ $this, 'render_event_tickets_api_meta_box' ],
-            null,
-            'side'
+			'event_tickets_event_api',
+			__( 'Event Check-in API', 'et-per-event-checkin' ),
+			[ $this, 'render_event_tickets_api_meta_box' ],
+			null,
+			'side'
 		);
 	}
 
 	/**
-     * Show a meta box with the Event API key.
-     *
+	 * Show a meta box with the Event API key.
+	 *
 	 * @param \WP_Post $post Current post Object.
 	 */
 	function render_event_tickets_api_meta_box( $post ) {
@@ -129,13 +129,13 @@ class Api_Handler {
 		$kb_link = '<a href="' . esc_url( $kb_url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'QR Code App', 'et-per-event-checkin' ) . '</a>';
 		?>
 		<input
-            type="text"
-            disabled
-            value="<?php esc_attr_e( $api_key ); ?>"
-        >
+			type="text"
+			disabled
+			value="<?php esc_attr_e( $api_key ); ?>"
+		>
 		<p>
-            <?php printf( esc_html__( 'Copy this API into the %s to allow checkin for this Event Only.', 'et-per-event-checkin' ), $kb_link ); ?>
-        </p>
+			<?php printf( esc_html__( 'Copy this API into the %s to allow checkin for this Event Only.', 'et-per-event-checkin' ), $kb_link ); ?>
+		</p>
 		<?php
 	}
 }
