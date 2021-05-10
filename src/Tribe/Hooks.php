@@ -52,6 +52,8 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 */
 	protected function add_actions() {
 		add_action( 'tribe_load_text_domains', [ $this, 'load_text_domains' ] );
+		add_action( 'tribe_tickets_ticket_added', tribe_callback( 'extension.per_event_checkin.api_handler', 'generate_api_code_for_event' ) );
+		add_action( 'add_meta_boxes', tribe_callback( 'extension.per_event_checkin.api_handler', 'add_event_api_meta_box' ) );
 	}
 
 	/**
@@ -60,7 +62,7 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 * @since 1.0.0
 	 */
 	protected function add_filters() {
-
+		add_filter( 'event_tickets_plus_requested_api_is_valid', tribe_callback( 'extension.per_event_checkin.api_handler', 'alter_default_api_with_event_api' ), 10, 2 );
 	}
 
 	/**
