@@ -39,7 +39,7 @@ class Api_Handler {
 		/** @var \Tribe__Tickets_Plus__QR__Settings $qr_settings */
 		$qr_settings = tribe( 'tickets-plus.qr.site-settings' );
 
-		$api_key = $qr_settings->generate_new_api();
+		$api_key = $qr_settings->generate_new_api_key();
 
 		update_post_meta( $post_id, $this->api_meta_key, $api_key );
 	}
