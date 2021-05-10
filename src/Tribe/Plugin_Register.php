@@ -26,7 +26,6 @@ class Plugin_Register extends Abstract_Plugin_Register {
 	protected $main_class   = Plugin::class;
 	protected $dependencies = [
 		'parent-dependencies' => [
-			'Tribe__Tickets__Main'      => '5.2.0',
 			'Tribe__Tickets_Plus__Main' => '5.2.4',
 		],
 	];
