@@ -54,6 +54,9 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		add_action( 'tribe_load_text_domains', [ $this, 'load_text_domains' ] );
 		add_action( 'tribe_tickets_ticket_added', tribe_callback( 'extension.per_event_checkin.api_handler', 'generate_api_code_for_event' ) );
 		add_action( 'add_meta_boxes', tribe_callback( 'extension.per_event_checkin.api_handler', 'add_event_api_meta_box' ) );
+
+		// Add Community Ticket Integration.
+		add_action( 'tribe_post_get_template_part_community-tickets/modules/tickets', tribe_callback( 'extension.per_event_checkin.api_handler', 'add_community_tickets_api_box' ) );
 	}
 
 	/**

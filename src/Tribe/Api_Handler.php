@@ -138,4 +138,38 @@ class Api_Handler {
 		</p>
 		<?php
 	}
+
+	/**
+	 * Show API key box for Event on Community Event edit page.
+	 *
+	 * @since 1.1.0
+	 */
+	function add_community_tickets_api_box() {
+
+		$post = get_post();
+
+		// Only display the API box if we are editing a valid post.
+		if ( ! $post ) {
+			return;
+		}
+
+		// Maybe generate API key if needed.
+		$this->generate_api_code_for_event( $post->ID );
+		?>
+		<div id="tickets-api" class="tribe-section tribe-section-api-key">
+			<div class="tribe-section-header">
+				<h3>
+					<?php
+					esc_html_e( 'Event API Key', 'et-per-event-checkin' );
+					?>
+				</h3>
+			</div>
+			<div class="tribe-section-content">
+				<?php
+					$this->render_event_tickets_api_meta_box( $post );
+				?>
+			</div>
+		</div>
+		<?php
+	}
 }
