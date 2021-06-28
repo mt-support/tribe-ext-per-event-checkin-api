@@ -153,6 +153,15 @@ class Api_Handler {
 			return;
 		}
 
+		$uri = $_SERVER[ 'REQUEST_URI' ];
+
+		// Don't display if not on edit page.
+		if (
+			false === stripos( $uri, '/event/' )
+		) {
+			return;
+		}
+
 		// Maybe generate API key if needed.
 		$this->generate_api_code_for_event( $post->ID );
 		?>
