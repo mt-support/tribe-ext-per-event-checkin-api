@@ -104,7 +104,7 @@ class Api_Handler {
 		$api_key = get_post_meta( $post->ID, $this->api_meta_key, true );
 
 		if ( empty( $api_key ) ) {
-			return;
+			$this->generate_api_code_for_event( $post->ID );
 		}
 
 		add_meta_box(
