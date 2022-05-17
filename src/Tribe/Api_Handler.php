@@ -153,12 +153,8 @@ class Api_Handler {
 			return;
 		}
 
-		$uri = $_SERVER[ 'REQUEST_URI' ];
-
-		// Don't display if not on edit page.
-		if (
-			false === stripos( $uri, '/event/' )
-		) {
+		// Don't display if not on edit page or REQUEST_URI not set.
+		if ( !isset($_SERVER[ 'REQUEST_URI' ]) || false === stripos($_SERVER[ 'REQUEST_URI' ], '/event/' )) {
 			return;
 		}
 
@@ -174,9 +170,7 @@ class Api_Handler {
 				</h3>
 			</div>
 			<div class="tribe-section-content">
-				<?php
-					$this->render_event_tickets_api_meta_box( $post );
-				?>
+				<?php $this->render_event_tickets_api_meta_box( $post ); ?>
 			</div>
 		</div>
 		<?php
