@@ -153,8 +153,8 @@ class Api_Handler {
 			return;
 		}
 
-		// Don't display if not on edit page or REQUEST_URI not set.
-		if ( !isset($_SERVER[ 'REQUEST_URI' ]) || false === stripos($_SERVER[ 'REQUEST_URI' ], '/event/' )) {
+		// Don't display if not on community edit page.
+		if ( ! tribe_is_community_edit_event_page() ) {
 			return;
 		}
 
@@ -164,9 +164,7 @@ class Api_Handler {
 		<div id="tickets-api" class="tribe-section tribe-section-api-key">
 			<div class="tribe-section-header">
 				<h3>
-					<?php
-					esc_html_e( 'Event API Key', 'et-per-event-checkin' );
-					?>
+					<?php esc_html_e( 'Event API Key', 'et-per-event-checkin' ); ?>
 				</h3>
 			</div>
 			<div class="tribe-section-content">
