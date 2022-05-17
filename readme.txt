@@ -33,7 +33,8 @@ We're always interested in your feedback and our [Help Desk](https://support.the
 == Changelog ==
 
 = [1.1.0] TBD =
-
+* Enhancement - Added Community Tickets integration.
+* Fix - Fixed metabox not showing up for new events.
 
 = [1.0.0] 2021-05-08 =
 
