@@ -104,7 +104,7 @@ class Api_Handler {
 		$api_key = get_post_meta( $post->ID, $this->api_meta_key, true );
 
 		if ( empty( $api_key ) ) {
-			return;
+			$this->generate_api_code_for_event( $post->ID );
 		}
 
 		add_meta_box(
@@ -136,6 +136,41 @@ class Api_Handler {
 		<p>
 			<?php printf( esc_html__( 'Copy this API into the %s to allow checkin for this Event Only.', 'et-per-event-checkin' ), $kb_link ); ?>
 		</p>
+		<?php
+	}
+
+	/**
+	 * Show API key box for Event on Community Event edit page.
+	 *
+	 * @since 1.1.0
+	 */
+	function add_community_tickets_api_box() {
+
+		$post = get_post();
+
+		// Only display the API box if we are editing a valid post.
+		if ( ! $post ) {
+			return;
+		}
+
+		// Don't display if not on community edit page.
+		if ( ! tribe_is_community_edit_event_page() ) {
+			return;
+		}
+
+		// Maybe generate API key if needed.
+		$this->generate_api_code_for_event( $post->ID );
+		?>
+		<div id="tickets-api" class="tribe-section tribe-section-api-key">
+			<div class="tribe-section-header">
+				<h3>
+					<?php esc_html_e( 'Event API Key', 'et-per-event-checkin' ); ?>
+				</h3>
+			</div>
+			<div class="tribe-section-content">
+				<?php $this->render_event_tickets_api_meta_box( $post ); ?>
+			</div>
+		</div>
 		<?php
 	}
 }
