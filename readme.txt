@@ -5,7 +5,7 @@ Tags: events, calendar
 Requires at least: 4.9
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -31,6 +31,10 @@ Please visit our [extension library](https://theeventscalendar.com/extensions/) 
 We're always interested in your feedback and our [Help Desk](https://support.theeventscalendar.com/) are the best place to flag any issues. Do note, however, that the degree of support we provide for extensions like this one tends to be very limited.
 
 == Changelog ==
+
+= [1.1.0] TBD =
+* Enhancement - Added Community Tickets integration.
+* Fix - Fixed metabox not showing up for new events.
 
 = [1.0.0] 2021-05-08 =
 

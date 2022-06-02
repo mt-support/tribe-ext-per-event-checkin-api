@@ -4,7 +4,7 @@
  * Plugin URI:        __TRIBE_URL__
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-per-event-checkin
  * Description:       Allow separate API for each Event for scanning with QR code app.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            The Events Calendar
  * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
@@ -56,7 +56,7 @@ function tribe_extension_per_event_checkin() {
 			'<p>' . esc_html__( 'Couldn\'t properly load "Event Tickets Extension: Per Event Checkin API" the extension was deactivated.', 'et-per-event-checkin' ) . '</p>',
 			[],
 			// 1 second after that make sure the transiet is removed.
-			1 
+			1
 		);
 
 		if ( ! function_exists( 'deactivate_plugins' ) ) {
